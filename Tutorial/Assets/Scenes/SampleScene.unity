@@ -189,6 +189,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 206cc5e765f12cc409707b2ec8c5f216, type: 3}
+--- !u!1 &207975300 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6839561021539054996, guid: 206cc5e765f12cc409707b2ec8c5f216,
+    type: 3}
+  m_PrefabInstance: {fileID: 207975299}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &235201502
 GameObject:
   m_ObjectHideFlags: 0
@@ -840,6 +846,25 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!95 &1925579850
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1925579847}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: cae1e3ccbb9a05a4c9420950d3e141eb, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &1925579851
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -855,73 +880,7 @@ MonoBehaviour:
   moveSpeed: 1.5
   jumpSpeed: 4
   timeBeforeTurning: 4
+  attackDelay: 5
   timeBeforeJumping: 3
---- !u!1001 &8853526178185979567
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 6015646630876511941, guid: 54e1ab32dc6cc4846960733e4654beed,
-        type: 3}
-      propertyPath: m_Name
-      value: Arrow
-      objectReference: {fileID: 0}
-    - target: {fileID: 8490999265742529093, guid: 54e1ab32dc6cc4846960733e4654beed,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.98
-      objectReference: {fileID: 0}
-    - target: {fileID: 8490999265742529093, guid: 54e1ab32dc6cc4846960733e4654beed,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8490999265742529093, guid: 54e1ab32dc6cc4846960733e4654beed,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8490999265742529093, guid: 54e1ab32dc6cc4846960733e4654beed,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8490999265742529093, guid: 54e1ab32dc6cc4846960733e4654beed,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8490999265742529093, guid: 54e1ab32dc6cc4846960733e4654beed,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8490999265742529093, guid: 54e1ab32dc6cc4846960733e4654beed,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8490999265742529093, guid: 54e1ab32dc6cc4846960733e4654beed,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 8490999265742529093, guid: 54e1ab32dc6cc4846960733e4654beed,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8490999265742529093, guid: 54e1ab32dc6cc4846960733e4654beed,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8490999265742529093, guid: 54e1ab32dc6cc4846960733e4654beed,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 54e1ab32dc6cc4846960733e4654beed, type: 3}
+  arrow: {fileID: 6015646630876511941, guid: 54e1ab32dc6cc4846960733e4654beed, type: 3}
+  bow: {fileID: 207975300}

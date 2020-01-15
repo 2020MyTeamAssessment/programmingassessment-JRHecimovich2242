@@ -7,29 +7,44 @@ public class Skeleton : MonoBehaviour
     [SerializeField] float moveSpeed = 1f;
     [SerializeField] float jumpSpeed = 4f;
     [SerializeField] float timeBeforeTurning = 4f;
+    [SerializeField] float attackDelay = 5f;
+    bool attacking = false;
     float walkTime;
     [SerializeField] float timeBeforeJumping = 3f;
     float jumpTime;
+    float attackTime;
     Vector2 skeletonScale;
+
+    [SerializeField] GameObject arrow, bow;
 
     
     //Cached component references
     Rigidbody2D myRigidBody;
+    Animator myAnimator;
 
     // Start is called before the first frame update
     void Start()
     {
         //Store a reference to the Rigidbody2D component of the skeleton
         myRigidBody = GetComponent<Rigidbody2D>();
+        myAnimator = GetComponent<Animator>();
         walkTime = timeBeforeTurning;
         jumpTime = timeBeforeJumping;
+        attackTime = attackDelay;
         skeletonScale = transform.localScale;
     }
 
     // Update is called once per frame
     void Update()
     {
-        HandleMovement();
+        if (!attacking)
+        {
+            //When the skeleton attacks, we want to freeze it so it is not shooting and moving at the same time
+            //I am choosing to have the skeleton be stationary while attacking for the purposes of this assessment
+            HandleMovement();
+            AttackTimerChange();
+        }
+        
     }
 
     private void HandleMovement()
@@ -80,6 +95,37 @@ public class Skeleton : MonoBehaviour
     {
         jumpTime = timeBeforeJumping;
         myRigidBody.velocity += new Vector2(0f , jumpSpeed);
+    }
+
+    private void AttackTimerChange()
+    {
+        attackTime -= Time.deltaTime;
+        if(attackTime < Mathf.Epsilon)
+        {
+            myAnimator.SetTrigger("Attack");
+        }
+    }
+
+    public void Attack()
+    {
+        //Instantiate the arrow
+        myRigidBody.velocity = new Vector2(0f, 0f);
+        Instantiate(arrow, bow.transform.position, transform.rotation);
+    }
+
+    public void StartAttacking()
+    {
+        //Freeze the skeleton so it does not move and attack at the same time
+        attacking = true;
+        myRigidBody.velocity = new Vector2(0f, 0f);
+    }
+
+
+    public void StopAttacking()
+    {
+        //Set attacking to false so that HandleMovement() will begin being called again
+        attacking = false;
+        attackTime = attackDelay; 
     }
 
 }
