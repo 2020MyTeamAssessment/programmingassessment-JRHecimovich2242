@@ -4,18 +4,30 @@ using UnityEngine;
 
 public class Skeleton : MonoBehaviour
 {
+    [Header("Movement Variables")]
     [SerializeField] float moveSpeed = 1f;
     [SerializeField] float jumpSpeed = 4f;
+
+    [Header("Delay Variables")]
     [SerializeField] float timeBeforeTurning = 4f;
     [SerializeField] float attackDelay = 5f;
-    bool attacking = false;
-    float walkTime;
     [SerializeField] float timeBeforeJumping = 3f;
+
+    [Header("GameObject References")]
+    [SerializeField] GameObject arrow;
+    [SerializeField] GameObject bow;
+
+
+    bool attacking = false;
+    bool alive = true;
+    float walkTime;
     float jumpTime;
     float attackTime;
+    int arrowsBeforeDeath = 3;
+    int arrowsFired = 0;
     Vector2 skeletonScale;
 
-    [SerializeField] GameObject arrow, bow;
+    
 
     
     //Cached component references
@@ -37,14 +49,16 @@ public class Skeleton : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!attacking)
+        if (alive)
         {
-            //When the skeleton attacks, we want to freeze it so it is not shooting and moving at the same time
-            //I am choosing to have the skeleton be stationary while attacking for the purposes of this assessment
-            HandleMovement();
-            AttackTimerChange();
+            if (!attacking)
+            {
+                //When the skeleton attacks, we want to freeze it so it is not shooting and moving at the same time
+                //I am choosing to have the skeleton be stationary while attacking for the purposes of this assessment
+                HandleMovement();
+                AttackTimerChange();
+            }
         }
-        
     }
 
     private void HandleMovement()
@@ -108,6 +122,7 @@ public class Skeleton : MonoBehaviour
 
     public void Attack()
     {
+        arrowsFired++;
         //Instantiate the arrow
         myRigidBody.velocity = new Vector2(0f, 0f);
         Instantiate(arrow, bow.transform.position, transform.rotation);
@@ -125,7 +140,24 @@ public class Skeleton : MonoBehaviour
     {
         //Set attacking to false so that HandleMovement() will begin being called again
         attacking = false;
-        attackTime = attackDelay; 
+        attackTime = attackDelay;
+        if(arrowsFired >= arrowsBeforeDeath)
+        {
+            //After the set amount of arrows are fired, the skeleton will die
+            Death();
+        }
+    }
+
+    private void Death()
+    {
+        myAnimator.SetBool("Dead", true);
+        alive = false;
+        myRigidBody.velocity = new Vector2(0f, 0f);
+    }
+    public void DestroySkeleton()
+    {
+        //Called by death animation. Will destroy the game object after the animation completes
+        Destroy(gameObject);
     }
 
 }
